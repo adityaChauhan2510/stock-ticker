@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc -b",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"node dist/index.js\" \"node dist/StockService.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node-cron": "^3.0.11",
+    "@types/ws": "^8.5.10"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3",
+    "redis": "^4.6.13",
+    "typescript": "^5.4.5",
+    "ws": "^8.17.0"
+  }
+}

@@ -1,0 +1,53 @@
+name: 'Build and Deploy'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./server
+          file: ./server/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/stock-ticker:latest
+      
+      - name: Verify Pushed Image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/stock-ticker:latest
+
+      # - name: Deploy to EC2
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     script: |
+      #       mkdir -p stock-ticker/server
+      #       echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" > stock-ticker/server/.env
+
+      #       cat stock-ticker/server/.env
+
+      #       cd stock-ticker/server
+      #       git pull origin master
+      #       sudo docker-compose down
+      #       sudo docker-compose pull
+      #       sudo docker-compose up -d --build
+      
+        

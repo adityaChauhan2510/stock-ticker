@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+  stock-ticker:
+    image: stock-ticker
+    container_name: stock-ticker
+    ports:
+      - "8080:8080"
+      - "4000:4000"
+    environment:
+      STOCK_API_KEY: ${STOCK_API_KEY}
+      STOCK_API_URL: ${STOCK_API_URL}
+
+volumes:
+  redis_data:
+    driver: local
