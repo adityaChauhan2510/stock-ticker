@@ -41,11 +41,12 @@ jobs:
           script: |
             mkdir -p stock-ticker/server
             echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" > stock-ticker/server/.env
+            echo "STOCK_API_URL=${{ secrets.STOCK_API_URL }}" >> stock-ticker/server/.env
 
             cat stock-ticker/server/.env
 
             cd stock-ticker/server
-            git pull origin master
+            git pull origin main
             sudo docker-compose down
             sudo docker-compose pull
             sudo docker-compose up -d --build
