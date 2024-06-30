@@ -32,22 +32,22 @@ jobs:
       - name: Verify Pushed Image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/stock-ticker:latest
 
-      # - name: Deploy to EC2
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USERNAME }}
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     script: |
-      #       mkdir -p stock-ticker/server
-      #       echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" > stock-ticker/server/.env
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p stock-ticker/server
+            echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" > stock-ticker/server/.env
 
-      #       cat stock-ticker/server/.env
+            cat stock-ticker/server/.env
 
-      #       cd stock-ticker/server
-      #       git pull origin master
-      #       sudo docker-compose down
-      #       sudo docker-compose pull
-      #       sudo docker-compose up -d --build
+            cd stock-ticker/server
+            git pull origin master
+            sudo docker-compose down
+            sudo docker-compose pull
+            sudo docker-compose up -d --build
       
         
