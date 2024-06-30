@@ -40,8 +40,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             mkdir -p stock-ticker/server
-            echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" >> stock-ticker/server/.env
-            echo "STOCK_API_URL=${{ secrets.STOCK_API_URL }}" >> stock-ticker/server/.env
+            echo "STOCK_API_KEY=${{ secrets.STOCK_API_KEY }}" > stock-ticker/server/.env
+            echo "STOCK_API_URL=${{ secrets.STOCK_API_URL }}" > stock-ticker/server/.env
 
             cat stock-ticker/server/.env
 
