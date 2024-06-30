@@ -4,9 +4,10 @@ import { Line } from "react-chartjs-2";
 import 'chart.js/auto';
 import { StockItemData } from "../types/StockItemData";
 import { useMemo } from "react";
+const socketUrl = import.meta.env.SOCKET_URL as string;
 
 const StockDashboard = () => {
-    const { loading } = useSocket('ws://localhost:8080');
+    const { loading } = useSocket(socketUrl);
     const data = useSelector((state: any) => state.data.data || []);
   
 
