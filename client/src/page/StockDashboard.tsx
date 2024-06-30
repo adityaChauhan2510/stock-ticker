@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import 'chart.js/auto';
 import { StockItemData } from "../types/StockItemData";
 import { useMemo } from "react";
-const socketUrl = import.meta.env.SOCKET_URL as string;
+const socketUrl = import.meta.env.VITE_SOCKET_URL as string;
 
 const StockDashboard = () => {
     const { loading } = useSocket(socketUrl);
