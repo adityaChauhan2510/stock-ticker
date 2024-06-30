@@ -3,8 +3,6 @@ import http from "http";
 import PubSubManager from "./PubSubManager";
 
 
-
-
 const server = http.createServer((req, res) => {
     console.log(req.url)
     res.end('okay');
